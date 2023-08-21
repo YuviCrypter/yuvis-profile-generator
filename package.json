@@ -1,0 +1,40 @@
+{
+  "name": "yuvis-profile-generator",
+  "version": "1.0.1",
+  "description": "Profile Picture Icon Generator like GitHub's but different and style included!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+"module": "index.js",
+"files": [ "README.md" ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuviCrypter/yuvis-profile-generator.git"
+  },
+  "keywords": [
+    "logo",
+    "icon",
+    "github",
+    "generator",
+    "profile",
+    "pfp",
+    "random"
+  ],
+  "author": "Yuvraj Darshankar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YuviCrypter/yuvis-profile-generator/issues"
+  },
+  "homepage": "https://github.com/YuviCrypter/yuvis-profile-generator#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.22.10",
+    "@babel/core": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
+  }
+}
