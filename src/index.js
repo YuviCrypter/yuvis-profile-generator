@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Logo.module.css";
 
 export const randomColor = () => {
   return (
@@ -11,9 +10,30 @@ export const randomColor = () => {
   );
 };
 
-export var codeValue = "";
+export function randomValue(resolution = 2) {
+  let valueLength = 0;
 
-export default function Profile({
+  function factoriallike() {
+    let temp = "";
+    for (let i = resolution; i >= 1; i--) {
+      valueLength += i;
+    }
+
+    for (let i = 0; i < valueLength; i++) {
+      let num = (1 + parseInt(Math.random() * 100)) % 2;
+
+      temp += num.toString();
+    }
+
+    return temp;
+  }
+
+  const values = factoriallike();
+
+  return values;
+}
+
+export function Profile({
   length = 256,
   borderColor,
   resolution = 3,
@@ -85,7 +105,6 @@ export default function Profile({
 
     let valueLength = 0;
     const values = factoriallike();
-    codeValue = values;
 
     function factoriallike() {
       let temp = "";
@@ -134,7 +153,6 @@ export default function Profile({
     }
 
     setGrid(grids);
-    // setValues(values);
     if (setValue != undefined) {
       setValue(values);
     }
@@ -157,14 +175,22 @@ export default function Profile({
 
   return (
     <div
-      className={styles.logo}
       style={{
         borderRadius: shape == 0 ? "50%" : 0,
+        transform: "rotateZ(45deg)",
+        width: "fit-content",
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        boxShadow: "0 0 50px 10px rgba(0, 0, 0, 0.4)",
+        ":active": {
+          transform: "rotate(45deg) scale(0.9)",
+        },
       }}
-      onClick={() => generateRandom()}
     >
       <div
-        className={styles.logo_border}
         style={{
           padding: borderColor != 2 ? "2%" : 0,
           borderRadius: shape == 0 ? "50%" : 0,
@@ -172,18 +198,27 @@ export default function Profile({
             (typeof borderColor !== undefined ? borderColor : 0) === 0
               ? "linear-gradient(-45deg,#996515, gold, #996515, gold,#996515)"
               : "linear-gradient(-45deg,darkgray, white, darkgray, white,darkgray)",
+
+          height: "100%",
+          width: "100%",
+          position: "absolute",
+          zIndex: "-1",
         }}
       ></div>
       <div
-        className={styles.withBg}
         style={{
           padding: `${
             length / Math.sqrt(2) / ((parseInt(resolution) + 1) * 2)
           }px`,
+
+          display: "flex",
+          position: "relative",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <div
-          className={styles.logo_bg}
           style={{
             boxShadow:
               borderColor != 2 && length >= 150
@@ -191,11 +226,16 @@ export default function Profile({
                 : "none",
             backgroundColor: color ? color : "white",
             borderRadius: shape == 0 ? "50%" : 0,
+
+            height: "100%",
+            width: "100%",
+            position: "absolute",
+            filter: "saturate(0.7) invert(1)",
+            backgroundImage:
+              "linear-gradient(-45deg,rgba(255, 255, 255, 0.4),rgba(0, 0, 0, 0.3))",
           }}
         ></div>
-        {/* <div className="logo_grad"></div> */}
         <div
-          className={styles.logo_inner}
           style={
             shape == 0
               ? {
@@ -205,11 +245,10 @@ export default function Profile({
           }
         >
           {grids.map((row, i) => (
-            <div key={i} className={styles.row}>
+            <div key={i} style={{ display: "flex" }}>
               {row.map((item, j) => (
                 <div
                   key={j}
-                  className={styles.item}
                   style={
                     item == 1
                       ? {
@@ -220,6 +259,12 @@ export default function Profile({
                           boxShadow: `0 0 10px ${color ? color : "white"}`,
                           opacity: "1",
                           transform: "scale(1)",
+
+                          aspectRatio: 1,
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          transition: "all 1.4s",
                         }
                       : {
                           height: `${
@@ -228,12 +273,15 @@ export default function Profile({
                           background: "transparent",
                           opacity: "0",
                           transform: "scale(0)",
+
+                          aspectRatio: 1,
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          transition: "all 1.4s",
                         }
                   }
-                >
-                  {/* <p>{j + i * resolution + 1}</p>
-                <p>{grids[i][j]}</p> */}
-                </div>
+                ></div>
               ))}
             </div>
           ))}
